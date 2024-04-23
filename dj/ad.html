@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advertisement with Close Button</title>
+<style>
+.ad-container {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 10px 20px;
+  border-radius: 10px;
+  display: none;
+}
+
+.ad-content {
+  display: inline-block;
+}
+
+.ad-close {
+  float: right;
+  cursor: pointer;
+}
+
+/* Animation */
+@keyframes slideIn {
+  from { bottom: -100px; }
+  to { bottom: 20px; }
+}
+
+@keyframes slideOut {
+  from { bottom: 20px; }
+  to { bottom: -100px; }
+}
+
+.show {
+  animation: slideIn 0.5s forwards;
+  display: block;
+}
+
+.hide {
+  animation: slideOut 0.5s forwards;
+}
+
+</style>
+</head>
+<body>
+
+<div id="adContainer" class="ad-container">
+  <div class="ad-content">
+    <p>This is an advertisement. Click the close button to hide it.</p>
+  </div>
+  <div class="ad-close" onclick="hideAd()">X</div>
+</div>
+
+<script>
+function hideAd() {
+  var adContainer = document.getElementById("adContainer");
+  adContainer.classList.remove("show");
+  adContainer.classList.add("hide");
+  setTimeout(function(){
+    adContainer.classList.remove("hide");
+    adContainer.style.display = "none";
+    setTimeout(function(){
+      adContainer.style.display = "block";
+      adContainer.classList.add("show");
+    }, 60000); // 1 minute
+  }, 500); // 0.5 second
+}
+
+// Show the ad initially
+document.getElementById("adContainer").classList.add("show");
+</script>
+
+</body>
+</html>
